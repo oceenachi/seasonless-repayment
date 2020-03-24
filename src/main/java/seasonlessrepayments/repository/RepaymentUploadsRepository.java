@@ -1,7 +1,7 @@
 package seasonlessrepayments.repository;
 
-import com.oaf.seasonless.model.RepaymentUploads;
 import org.springframework.data.jpa.repository.JpaRepository;
+import seasonlessrepayments.model.RepaymentUploads;
 
 public interface RepaymentUploadsRepository extends JpaRepository<RepaymentUploads, Long> {
 

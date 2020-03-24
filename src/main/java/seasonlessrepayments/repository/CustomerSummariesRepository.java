@@ -1,7 +1,8 @@
 package seasonlessrepayments.repository;
 
-import com.oaf.seasonless.model.CustomerSummaries;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import seasonlessrepayments.model.CustomerSummaries;
 
 public interface CustomerSummariesRepository extends JpaRepository<CustomerSummaries, Long> {
 }
