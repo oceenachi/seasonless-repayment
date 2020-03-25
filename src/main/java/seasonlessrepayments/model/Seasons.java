@@ -3,6 +3,7 @@ package seasonlessrepayments.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 @Entity
 public class Seasons {
@@ -13,7 +14,7 @@ public class Seasons {
     @NotBlank
     private String name;
 
-    private String startDate;
+    private Date startDate;
 
     private Long endDate;
 
@@ -38,11 +39,11 @@ public class Seasons {
 
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
@@ -54,7 +55,7 @@ public class Seasons {
         this.endDate = endDate;
     }
 
-    public Seasons(Long seasonsId, String name, String startDate, Long endDate) {
+    public Seasons(Long seasonsId, String name, Date startDate, Long endDate) {
         this.seasonsId = seasonsId;
         this.name = name;
         this.startDate = startDate;

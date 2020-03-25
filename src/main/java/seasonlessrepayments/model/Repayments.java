@@ -23,7 +23,7 @@ public class Repayments {
     private Date date;
 
     @NotNull
-    private Double amount;
+    private Long amount;
 
     private Long parentId;
 
@@ -59,11 +59,11 @@ public class Repayments {
         this.date = date;
     }
 
-    public Double getAmount() {
+    public Long getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 

@@ -3,9 +3,10 @@ package seasonlessrepayments.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
-@Table(name = "repayment")
+@Table(name = "repayment_input")
 public class RepaymentUploads {
 
     @Id
@@ -17,7 +18,7 @@ public class RepaymentUploads {
     private Long seasonID;
 
     @NotNull
-    private String date;
+    private Date date;
 
     @NotNull
     private Long amount;
@@ -49,11 +50,11 @@ public class RepaymentUploads {
         this.seasonID = seasonID;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

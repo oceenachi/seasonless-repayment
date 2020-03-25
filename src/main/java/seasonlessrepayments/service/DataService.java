@@ -20,6 +20,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Service
 public class DataService {
@@ -61,55 +64,67 @@ public class DataService {
             JSONArray customerSummaries = (JSONArray) jsonObject.get("CustomerSummaries");
             JSONArray repaymentUploads = (JSONArray) jsonObject.get("RepaymentUploads");
 
+
+//            String startDateString = "06/27/2007";
+//            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+//            Date startDate;
+//            try {
+//                startDate = df.parse(startDateString);
+//                String newDateString = df.format(startDate);
+//                System.out.println(newDateString);
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+
             for (JSONObject data : (Iterable<JSONObject>) seasons) {
                 assert false;
                 Seasons newSeason = new Seasons();
-                System.out.println(data.get("SeasonID"));
                 newSeason.setSeasonsId((Long) data.get("SeasonID"));
                 newSeason.setName((String) data.get("SeasonName"));
-                newSeason.setEndDate((Long) data.get("EndDate"));
-                newSeason.setStartDate((String) data.get("StartDate"));
-                System.out.println("newSeason:" + newSeason);
 
+                String startDateString = (String) data.get("StartDate");
+                DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+                Date startDate;
+                startDate = df.parse(startDateString);
+                newSeason.setStartDate(startDate);
+
+                newSeason.setEndDate((Long) data.get("EndDate"));
                 seasonRepository.save(newSeason);
             }
 
             for (JSONObject data : (Iterable<JSONObject>) customers) {
                 assert false;
-                System.out.println("data:" + data);
                 Customers newCustomers = new Customers();
                 newCustomers.setId((Long) data.get("CustomerID"));
                 newCustomers.setCustomerName((String) data.get("CustomerName"));
-                System.out.println("newCustomer:" + newCustomers);
 
                 customerRepository.save(newCustomers);
             }
 
             for (JSONObject data : (Iterable<JSONObject>) repaymentUploads) {
                 assert false;
-                System.out.println("data:" + data);
                 RepaymentUploads newRepaymentUploads = new RepaymentUploads();
                 newRepaymentUploads.setCustomerID((Long) data.get("CustomerID"));
                 newRepaymentUploads.setSeasonID((Long) data.get("SeasonID"));
                 newRepaymentUploads.setAmount((Long) data.get("Amount"));
-                newRepaymentUploads.setDate((String)data.get("Date"));
 
-                System.out.println("newRepaymentUploads:" + newRepaymentUploads);
+                String startDateString = (String) data.get("Date");
+                DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+                Date startDate;
+                startDate = df.parse(startDateString);
+                newRepaymentUploads.setDate(startDate);
 
                repaymentUploadsRepository.save(newRepaymentUploads);
             }
 
             for (JSONObject data : (Iterable<JSONObject>) customerSummaries) {
                 assert false;
-                System.out.println("data:" + data);
                 CustomerSummaries newCustomerSummaries = new CustomerSummaries();
-                System.out.println(data.get("SeasonID"));
                 newCustomerSummaries.setCustomerID((Long) data.get("CustomerID"));
                 newCustomerSummaries.setSeasonID((Long) data.get("SeasonID"));
-                newCustomerSummaries.setTotalCredit((Long) data.get("i 7Credit"));
+                newCustomerSummaries.setTotalCredit((Long) data.get("Credit"));
                 newCustomerSummaries.setTotalRepaid((Long) data.get("TotalRepaid"));
 
-                System.out.println("newCustomerSummaries:" + newCustomerSummaries);
 
                 customerSummariesRepository.save(newCustomerSummaries);
             }
@@ -119,6 +134,8 @@ public class DataService {
 
         }
     }
+
+
 
 }
 
