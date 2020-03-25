@@ -17,6 +17,7 @@ public interface CustomerSummariesRepository extends JpaRepository<CustomerSumma
     void updateTotalRepaid(Long newRepaid, Long customerID);
 
 
-    @Query("select summary from CustomerSummaries summary where summary.customerID = ?1 order by summary.seasonID")
+    @Query("select summary from CustomerSummaries summary inner join Seasons seasons on " +
+            "seasons.seasonsId = summary.seasonID where summary.customerID = ?1 and summary.totalCredit > summary.totalRepaid order by seasons.startDate")
     List<CustomerSummaries> findUniqueCustomerSeasons(Long customerId);
 }

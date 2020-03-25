@@ -48,7 +48,30 @@ public class RepaymentService {
 
             }
             else {
-                
+                List<CustomerSummaries> currentCustomerSummary =
+                        customerSummariesRepository.findUniqueCustomerSeasons(oneUpload.getCustomerID());
+
+                for(CustomerSummaries customerSummaries: currentCustomerSummary){
+                    if(amount <= 0){
+                        break;
+                    }
+                    if(customerSummaries.getTotalRepaid().equals(customerSummaries.getTotalCredit())){
+                        continue;
+                    }else if(customerSummaries.getTotalCredit() > customerSummaries.getTotalRepaid()){
+                        Long newRepaid = customerSummaries.getTotalRepaid() + amount;
+                        customerSummaries.setTotalRepaid(newRepaid);
+//                        customerSummariesRepository.updateTotalRepaid(newRepaid, customerSummaries.getCustomerID());
+
+                        Repayments repayments = new Repayments();
+                        repayments.setAmount(amount);
+                        repayments.setCustomerId(oneUpload.getCustomerID());
+                        repayments.setDate(oneUpload.getDate());
+                        repayments.setSeasonId(oneUpload.getSeasonID());
+//                        repayments.setParentId();
+//                        amount = customerSummaries.getTotalRepaid() - customerSummaries.getTotalCredit();
+                    }
+
+                }
             }
 
         }
